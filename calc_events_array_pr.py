@@ -86,8 +86,8 @@ def main():
       sn = sn.sel(Time=slice(datai.strftime('%Y-%m-%d %H:%M'), dataf.strftime('%Y-%m-%d %H:%M')))      
       pr = pr.sel(Time=slice(datai.strftime('%Y-%m-%d %H:%M'), dataf.strftime('%Y-%m-%d %H:%M')))
 
-      sn_pr1 = sn.where(pr > 1)
-      sn_pr2 = sn.where(pr > 2)
+      sn_pr1 = sn.where(pr > 1, 999)
+      sn_pr2 = sn.where(pr > 2, 999)
 
       # Boolean array with the places where the temperature is between -2 and 2
       count_bool_le = np.less_equal(sn_pr1.values, 271.15)
