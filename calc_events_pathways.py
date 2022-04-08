@@ -111,7 +111,7 @@ for y in range(datai, dataf+1):
     else:
       lastT2 = t2[-1,:,:]
       lastPR = pr[-1,:,:]
-      #ini = False
+      ini = False
       print('ini == true')
 
     # second timestep onward: follow the algorithm
