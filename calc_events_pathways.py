@@ -22,8 +22,8 @@ ns = 1e-9
 # Need to change this size later, as the grid is much larger now  
 xi=1015 #153
 yi = 1359 #166
-xi = 153
-yi = 166
+#xi = 153
+#yi = 166
 #1015, 1359
 aux = np.zeros((xi, yi))
 aux13 = np.zeros((xi, yi))
