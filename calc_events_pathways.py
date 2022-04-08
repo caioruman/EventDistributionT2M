@@ -104,6 +104,9 @@ for y in range(datai, dataf+1):
       print('ini == false')
       t2 = xr.concat([lastT2, t2], dim='Time')
       pr = xr.concat([lastPR, pr], dim='Time')
+      
+      t2 = t2.transpose("Time", "XLAT", "XLONG")
+      pr = pr.transpose("Time", "XLAT", "XLONG")
       print(t2.shape)
       lastT2 = t2[-1,:,:]
       lastPR = pr[-1,:,:]
