@@ -123,10 +123,10 @@ for y in range(datai, dataf+1):
       # if the aux == False, event not in place. set the entryways
       # set aux13 and aux24
       new_aux = np.logical_and(t2[i]>-2, t2[i]<2)
-      print(aux.shape)
-      print(t2[i-1].shape)
-      print(aux_true.shape)
-      print(aux13.shape)
+      #print(aux.shape)
+      #print(t2[i-1].shape)
+      #print(aux_true.shape)
+      #print(aux13.shape)
       aux13 = np.where((aux==False) & (t2[i-1] > 2), aux_true, aux13)
       aux24 = np.where((aux==False) & (t2[i-1] < -2), aux_true, aux24)
       # I need to keep the previous values of aux13 and aux24 here. if aux=true
