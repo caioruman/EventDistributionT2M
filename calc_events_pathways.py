@@ -13,8 +13,8 @@ import pickle
 sim = "CTRL"
 st = f"/chinook/marinier/CONUS_2D/{sim}"
 
-datai = 2001
-dataf = 2002
+datai = 2002
+dataf = 2013
 
 store = '/chinook/cruman/Data/Near0Events'
 ns = 1e-9
