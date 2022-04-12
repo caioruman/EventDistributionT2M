@@ -25,22 +25,18 @@ yi = 1359 #166
 #xi = 153
 #yi = 166
 #1015, 1359
-aux = np.zeros((xi, yi))
-aux13 = np.zeros((xi, yi))
-aux24 = np.zeros((xi, yi))
-aux1 = np.zeros((xi, yi))
-aux2 = np.zeros((xi, yi))
-aux3 = np.zeros((xi, yi))
-aux4 = np.zeros((xi, yi))
+aux = np.full((xi, yi), True)
+aux13 = np.full((xi, yi), True)
+aux24 = np.full((xi, yi), True)
+aux1 = np.full((xi, yi), True)
+aux2 = np.full((xi, yi), True)
+aux3 = np.full((xi, yi), True)
+aux4 = np.full((xi, yi), True)
 
-aux_true = np.zeros((xi, yi))
-aux_true += 1
-aux_false = np.zeros((xi, yi))
+aux_true = np.full((xi, yi), True)
+aux_false = np.full((xi, yi), False)
 
-aux_pr = np.zeros((xi, yi))
-aux2_pr = np.zeros((xi, yi))
-aux3_pr = np.zeros((xi, yi))
-aux4_pr = np.zeros((xi, yi))
+aux_pr = np.full((xi, yi), False)
 
 ini = True
 for y in range(datai, dataf+1):
@@ -131,16 +127,15 @@ for y in range(datai, dataf+1):
       aux24 = np.where((aux==False) & (t2[i-1] < -2), aux_true, aux24)
 
       # Check for precipitation
-      aux_pr = np.where((pr[i] > 0.1), aux_true, aux_pr)
+      aux_pr = np.where((pr[i] > 1), aux_true, aux_pr)
       # I need to keep the previous values of aux13 and aux24 here. if aux=true
 
       # if the aux == True, event in place. 
       # If the current temperature is between -2 and 2, do nothing. aux continues = True
       # if not, event finished. Calculate the entryways. set aux = False
       # Only adds to aux if the aux_pr == True
-      aux3_bool = ((aux13==True) & (t2[i] > 2)) & (aux == True)
-      
-      aux3 += np.where(((aux13==True) & (t2[i] > 2)) & (aux == True) & aux_pr, aux_true, aux_false)
+      aux3_bool = ((aux13==True) & (t2[i] > 2)) & (aux == True)      
+      aux3 += np.where(aux3_bool & aux_pr, aux_true, aux_false)
 
       aux2_bool = ((aux24==True) & (t2[i] > 2)) & (aux == True)
       aux2 += np.where(aux2_bool & aux_pr, aux_true, aux_false)
