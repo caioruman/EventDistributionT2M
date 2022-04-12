@@ -139,6 +139,7 @@ for y in range(datai, dataf+1):
       # if not, event finished. Calculate the entryways. set aux = False
       # Only adds to aux if the aux_pr == True
       aux3_bool = ((aux13==True) & (t2[i] > 2)) & (aux == True)
+      print(aux3_bool)
       aux3 += np.where(aux3_bool and aux_pr, aux_true, aux_false)
 
       aux2_bool = ((aux24==True) & (t2[i] > 2)) & (aux == True)
