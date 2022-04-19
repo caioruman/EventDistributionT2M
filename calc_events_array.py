@@ -18,12 +18,12 @@ parser.add_argument("yearf", type=int, help="Final Year", default=0)
 parser.add_argument("sim", type=str, help="Simulation Type", default=0)
 args=parser.parse_args()
 
-sim = args.sim
+def main(args):
 
-datai = args.yeari
-dataf = args.yearf
+  sim = args.sim
 
-def main():
+  datai = args.yeari
+  dataf = args.yearf
     
   #sim = "CTRL"
   st = f"/chinook/marinier/CONUS_2D/{sim}"
@@ -121,4 +121,4 @@ def main():
       pickle.dump( count, open( f"{store}/t2m_pr01_{sim}_{y}_{m:02d}.p", "wb" ) )
 
 if __name__ == '__main__':
-  main()
+  main(args)
