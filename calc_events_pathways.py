@@ -10,11 +10,11 @@ from dateutil.relativedelta import relativedelta
 import pickle
 #import os
 
-sim = "CTRL"
+sim = "PGW"
 st = f"/chinook/marinier/CONUS_2D/{sim}"
 
 datai = 2000
-dataf = 2000
+dataf = 2013
 
 store = '/chinook/cruman/Data/Near0Events'
 ns = 1e-9
@@ -69,8 +69,8 @@ for y in range(datai, dataf+1):
     if (y == 2013) and m > 9:
       continue
         
-    t2 = xr.open_dataset(f'{st}/{y}/wrf2d_d01_CTRL_T2_{y}{mi:02d}-{y}{mf:02d}.nc', engine='netcdf4')
-    pr = xr.open_dataset(f'{st}/{y}/wrf2d_d01_CTRL_PREC_ACC_NC_{y}{mi:02d}-{y}{mf:02d}.nc', engine='netcdf4')
+    t2 = xr.open_dataset(f'{st}/{y}/wrf2d_d01_{sim}_T2_{y}{mi:02d}-{y}{mf:02d}.nc', engine='netcdf4')
+    pr = xr.open_dataset(f'{st}/{y}/wrf2d_d01_{sim}_PREC_ACC_NC_{y}{mi:02d}-{y}{mf:02d}.nc', engine='netcdf4')
     
     # Slicing the domain to make the computations faster
     #i1=721; j1=1167; i2=874; j2=1333
@@ -149,10 +149,10 @@ for y in range(datai, dataf+1):
       aux = new_aux
     
     # Save stuff, reset aux1234.
-    pickle.dump( aux1, open( f"{store}/pathway1_{y}_{m:02d}.p", "wb" ) )
-    pickle.dump( aux2, open( f"{store}/pathway2_{y}_{m:02d}.p", "wb" ) )
-    pickle.dump( aux3, open( f"{store}/pathway3_{y}_{m:02d}.p", "wb" ) )
-    pickle.dump( aux4, open( f"{store}/pathway4_{y}_{m:02d}.p", "wb" ) )
+    pickle.dump( aux1, open( f"{store}/pathway1_{sim}_{y}_{m:02d}.p", "wb" ) )
+    pickle.dump( aux2, open( f"{store}/pathway2_{sim}_{y}_{m:02d}.p", "wb" ) )
+    pickle.dump( aux3, open( f"{store}/pathway3_{sim}_{y}_{m:02d}.p", "wb" ) )
+    pickle.dump( aux4, open( f"{store}/pathway4_{sim}_{y}_{m:02d}.p", "wb" ) )
 
     aux1 = np.zeros((xi, yi))
     aux2 = np.zeros((xi, yi))
