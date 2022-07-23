@@ -68,7 +68,7 @@ def main(args):
       #if (m < 5 or m > 9):
       #  continue
 
-      if os.path.exists(f"{store}/t2m_{sim}_{y}_{m:02d}.p"):
+      if os.path.exists(f"{store}/t2m_pr02_{sim}_{y}_{m:02d}.p"):
         print("jump")
         continue      
       
@@ -107,10 +107,10 @@ def main(args):
       # Counting all the 1 values in the time dimension
       count = np.count_nonzero(aux.astype(int), axis=0)      
            
-      pickle.dump( count, open( f"{store}/t2m_{sim}_{y}_{m:02d}.p", "wb" ) )                  
+#      pickle.dump( count, open( f"{store}/t2m_{sim}_{y}_{m:02d}.p", "wb" ) )                  
 
       # Same thing as above but for precipitation
-      sn_pr1 = sn.where(pr > 0.1, 999)
+      sn_pr1 = sn.where(pr > 0.2, 999)
       count_bool_le = np.less_equal(sn_pr1.values, 271.15)
       count_bool_ge = np.greater_equal(sn_pr1.values, 275.15)      
       between = count_bool_ge + count_bool_le
@@ -118,7 +118,7 @@ def main(args):
       # Counting all the 1 values in the time dimension
       count = np.count_nonzero(aux.astype(int), axis=0)      
            
-      pickle.dump( count, open( f"{store}/t2m_pr01_{sim}_{y}_{m:02d}.p", "wb" ) )
+      pickle.dump( count, open( f"{store}/t2m_pr02_{sim}_{y}_{m:02d}.p", "wb" ) )
 
 if __name__ == '__main__':
   main(args)

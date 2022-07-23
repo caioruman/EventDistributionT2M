@@ -8,13 +8,13 @@ import sys
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import pickle
-#import os
+import os
 
 sim = "CTRL"
 st = f"/chinook/marinier/CONUS_2D/{sim}"
 
 datai = 2000
-dataf = 2008
+dataf = 2013
 
 store = '/chinook/cruman/Data/Near0Events'
 ns = 1e-9
@@ -64,6 +64,10 @@ for y in range(datai, dataf+1):
 
     if (y == 2013) and m > 9:
       continue
+
+    if os.path.exists(f"{store}/pathway4_pr02_{y}_{m:02d}.p"):
+        print("jump")
+        continue
         
     t2 = xr.open_dataset(f'{st}/{y}/wrf2d_d01_CTRL_T2_{y}{mi:02d}-{y}{mf:02d}.nc', engine='netcdf4')
     pr = xr.open_dataset(f'{st}/{y}/wrf2d_d01_CTRL_PREC_ACC_NC_{y}{mi:02d}-{y}{mf:02d}.nc', engine='netcdf4')
@@ -127,7 +131,7 @@ for y in range(datai, dataf+1):
       aux24 = np.where((aux==False) & (t2[i-1] < -2), aux_true, aux24)
 
       # Check for precipitation
-      aux_pr = np.where((pr[i] > 0.1), aux_true, aux_pr)
+      aux_pr = np.where((pr[i] > 0.2), aux_true, aux_pr)
       # I need to keep the previous values of aux13 and aux24 here. if aux=true
 
       # if the aux == True, event in place. 
@@ -161,10 +165,10 @@ for y in range(datai, dataf+1):
       aux = new_aux
     
     # Save stuff, reset aux1234.
-    pickle.dump( aux1, open( f"{store}/pathway1_pr01_{y}_{m:02d}.p", "wb" ) )
-    pickle.dump( aux2, open( f"{store}/pathway2_pr01_{y}_{m:02d}.p", "wb" ) )
-    pickle.dump( aux3, open( f"{store}/pathway3_pr01_{y}_{m:02d}.p", "wb" ) )
-    pickle.dump( aux4, open( f"{store}/pathway4_pr01_{y}_{m:02d}.p", "wb" ) )
+    pickle.dump( aux1, open( f"{store}/pathway1_pr02_{y}_{m:02d}.p", "wb" ) )
+    pickle.dump( aux2, open( f"{store}/pathway2_pr02_{y}_{m:02d}.p", "wb" ) )
+    pickle.dump( aux3, open( f"{store}/pathway3_pr02_{y}_{m:02d}.p", "wb" ) )
+    pickle.dump( aux4, open( f"{store}/pathway4_pr02_{y}_{m:02d}.p", "wb" ) )
 
     aux1 = np.zeros((xi, yi))
     aux2 = np.zeros((xi, yi))
